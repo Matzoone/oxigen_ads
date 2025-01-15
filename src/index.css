@@ -9,7 +9,6 @@
   background-position: center, center;
   background-repeat: no-repeat, no-repeat;
   position: relative;
-
 }
 
 .footer::before {
@@ -27,8 +26,6 @@
   -webkit-filter: opacity(0.6);
   -webkit-filter: opacity(0.9);
 }
-
-
 
 /* موقعیت دکمه‌های ناوبری */
 .mySwiper .swiper-button-next,
@@ -54,13 +51,10 @@
   color: white;
 }
 
-
-
 .swiper-wrapper {
-  margin-bottom: 15px
-    /*توپکی پایین کارت*/
+  margin-bottom: 15px;
+  /*توپکی پایین کارت*/
 }
-
 
 .bg-circle {
   background-image: url("./assets/circle.svg");
@@ -90,4 +84,12 @@
 
 body {
   font-family: "Vazir", sans-serif;
+}
+
+.text-thick {
+  -webkit-text-stroke: 1px;
+}
+
+.text-thick2 {
+  -webkit-text-stroke: 1.5px;
 }

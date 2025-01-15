@@ -1,113 +1,313 @@
-// SlidingCards.jsx - بخش کارت‌های اسلایدی با دکمه‌های کنترلی و دیزاین جدید
-import React, { useRef } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
+import { useRef } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import { addCommas, digitsEnToFa } from "persian-tools2";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
 
-const SlidingCard = ({ price, oldPrice, description, description1, btn, btn1 }) => {
-    return (
-        <div className="bg-white text-black rounded-lg shadow-lg p-6 flex flex-col items-center">
-            <div className="text-2xl font-bold mb-2">{description}</div>
-            <div className="text-lg mb-2">{description1}</div>
-            <div className="text-lg mb-2 line-through">{oldPrice} تومان</div>
-            <div className="text-xl font-semibold mb-4">{price} تومان</div>
-            <button className="bg-blue-600 py-2 px-4 rounded-lg m-2">{btn}</button>
-            <button className="bg-blue-600 py-2 px-4 rounded-lg m-2">{btn1}</button>
-        </div>
-    );
+const SlidingCard = ({
+  price,
+  oldPrice,
+  description,
+  description1,
+  btn,
+  btn1,
+}) => {
+  const formattedPrice = digitsEnToFa(addCommas(price)) + " تومان";
+  const formattedOldPrice = digitsEnToFa(addCommas(oldPrice)) + " تومان";
+
+  return (
+    <div className="bg-white text-black rounded-lg shadow-lg p-6 flex flex-col items-center mt-4">
+      <div className="text-2xl font-bold mb-2">{description}</div>
+      <div className="text-lg mb-2">{description1}</div>
+      <div className="text-lg mb-2 line-through text-gray-400">
+        {formattedOldPrice}
+      </div>
+      <div className="text-xl font-semibold mb-4">{formattedPrice}</div>
+      <button className="bg-blue-600 py-2 px-4 rounded-2xl text-lg m-2 w-full font-black text-white">
+        {btn}
+      </button>
+      <button className="bg-blue-600 py-2 px-4 rounded-2xl text-lg m-2 w-full font-black text-white">
+        {btn1}
+      </button>
+    </div>
+  );
 };
 
 const SlidingCards = () => {
-    const cards = [
-        {
-            description: 'یک ماهه نامحدود',
-            description1: 'دو کاربره',
-            price: '99',
-            oldPrice: '199',
-            btn: 'خرید فوری از درگاه پرداخت',
-            btn1: 'خرید فوری از طریق پشتیبان تلگرام'
-        },
-        {
-            description: 'یک ماهه نامحدود',
-            description1: 'یک کاربره',
-            price: '169',
-            oldPrice: '235',
-            btn: 'خرید فوری از درگاه پرداخت',
-            btn1: 'خرید فوری از طریق پشتیبان تلگرام'
-        },
-        {
-            description: 'سه ماهه نامحدود',
-            description1: 'سه کاربره',
-            price: '249',
-            oldPrice: '350',
-            btn: 'خرید فوری از درگاه پرداخت',
-            btn1: 'خرید فوری از طریق پشتیبان تلگرام'
-        },
-        {
-            description: 'سه ماهه نامحدود',
-            description1: 'دو کاربره',
-            price: '319',
-            oldPrice: '399',
-            btn: 'خرید فوری از درگاه پرداخت',
-            btn1: 'خرید فوری از طریق پشتیبان تلگرام'
-        },
-        {
-            description: 'شش ماهه نامحدود',
-            description1: 'یک کاربره',
-            price: '359',
-            oldPrice: '449',
-            btn: 'خرید فوری از درگاه پرداخت',
-            btn1: 'خرید فوری از طریق پشتیبان تلگرام'
-        },
-    ];
+  // دکمه‌های ناوبری برای هر اسلایدر
+  const prevRef1 = useRef(null);
+  const nextRef1 = useRef(null);
+  const prevRef2 = useRef(null);
+  const nextRef2 = useRef(null);
 
-    const prevRef = useRef(null);
-    const nextRef = useRef(null);
+  const mainCards = [
+    {
+      Title: (
+        <p className="whitespace-normal text-xl gap-1 font-black text-thick text-center">
+          <span>لیست سرویس های نامحدود</span>{" "}
+          <span className="text-red-500 ml-1">اپ اختصاصی اکسیژن</span>
+        </p>
+      ),
+      desc: (
+        <p className="text-sm !text-slate-800 my-3 gap-1 text-thick">
+          (مخصوص اندروید)
+        </p>
+      ),
+      body2: " سرویس های نامحدود ",
+      body1: "اپ اختصاصی اکسیژن",
+      bodyDesc: "مخصوص اندروید",
+      img: "/public/v2ray.png",
+      cards: [
+        {
+          description: "یک ماهه نامحدود",
+          description1: "دو کاربره",
+          price: "99000",
+          oldPrice: "199000",
+          btn: "خرید فوری از درگاه پرداخت",
+          btn1: "خرید فوری از طریق پشتیبان تلگرام",
+        },
+        {
+          description: "یک ماهه نامحدود",
+          description1: "یک کاربره",
+          price: "169000",
+          oldPrice: "235000",
+          btn: "خرید فوری از درگاه پرداخت",
+          btn1: "خرید فوری از طریق پشتیبان تلگرام",
+        },
+        {
+          description: "سه ماهه نامحدود",
+          description1: "سه کاربره",
+          price: "249000",
+          oldPrice: "350000",
+          btn: "خرید فوری از درگاه پرداخت",
+          btn1: "خرید فوری از طریق پشتیبان تلگرام",
+        },
+        {
+          description: "سه ماهه نامحدود",
+          description1: "دو کاربره",
+          price: "319000",
+          oldPrice: "399000",
+          btn: "خرید فوری از درگاه پرداخت",
+          btn1: "خرید فوری از طریق پشتیبان تلگرام",
+        },
+        {
+          description: "شش ماهه نامحدود",
+          description1: "یک کاربره",
+          price: "359000",
+          oldPrice: "449000",
+          btn: "خرید فوری از درگاه پرداخت",
+          btn1: "خرید فوری از طریق پشتیبان تلگرام",
+        },
+      ],
+    },
+  ];
 
-    return (
-        <div className="flex items-center justify-center p-8 bg-blue-400 rounded-3xl shadow-md w-11/12">
-            <div className="w-1/4 text-center">
-                <h2 className="text-2xl font-bold mb-4 text-white">سرویس های نامحدود اپ اختصاصی اکسیژن </h2>
+  const mainCards2 = [
+    {
+      Title: (
+        <p className="flex text-xl gap-1 font-black text-thick mt-16 flex-nowrap whitespace-nowrap text-center">
+          <p> لیست سرویس های</p>
+          <p className="text-red-500">v2ray</p>
+          <p>برای همه پلتفرم ها</p>
+        </p>
+      ),
+      desc: (
+        <p className="text-sm !text-slate-800 my-3 gap-1 text-thick">
+          (ایفون-ویندوز-اندروید)
+        </p>
+      ),
+      body2: " سرویس های نامحدود  2",
+      body1: " اپ اختصاصی اکسیژن 2",
+      bodyDesc: "ایفون-ویندوز-اندروید",
+      img: "/public/logo111.png",
+      cards: [
+        {
+          description: "یک ماهه نامحدود",
+          description1: "سه کاربره",
+          price: "159000",
+          oldPrice: "199000",
+          btn: "خرید فوری از درگاه پرداخت",
+          btn1: "خرید فوری از طریق پشتیبان تلگرام",
+        },
+        {
+          description: "سه ماهه نامحدود",
+          description1: "یک کاربره",
+          price: "249000",
+          oldPrice: "350000",
+          btn: "خرید فوری از درگاه پرداخت",
+          btn1: "خرید فوری از طریق پشتیبان تلگرام",
+        },
+        {
+          description: "شش ماهه نامحدود",
+          description1: "دو کاربره",
+          price: "359000",
+          oldPrice: "449000",
+          btn: "خرید فوری از درگاه پرداخت",
+          btn1: "خرید فوری از طریق پشتیبان تلگرام",
+        },
+        {
+          description: "سه ماهه نامحدود",
+          description1: "یک کاربره",
+          price: "249000",
+          oldPrice: "350000",
+          btn: "خرید فوری از درگاه پرداخت",
+          btn1: "خرید فوری از طریق پشتیبان تلگرام",
+        },
+        {
+          description: "شش ماهه نامحدود",
+          description1: "دو کاربره",
+          price: "359000",
+          oldPrice: "449000",
+          btn: "خرید فوری از درگاه پرداخت",
+          btn1: "خرید فوری از طریق پشتیبان تلگرام",
+        },
+      ],
+    },
+  ];
+
+  return (
+    <>
+      {/* اولین اسلایدر */}
+      {mainCards.map((slider, index) => (
+        <div key={index} className="flex flex-col items-center w-full">
+          {slider.Title}
+          {slider.desc}
+          <div className="flex items-center justify-center p-12 bg-blue-400 rounded-3xl shadow-md w-11/12 max-md:p-0">
+            <div className="w-1/4 text-center max-md:hidden">
+              <h2 className="text-[28px] mb-4 text-white text-thick">
+                <p>{slider.body1}</p>
+                <p>{slider.body2}</p>
+                <p className="text-lg mt-4 font-thin">{slider.bodyDesc}</p>
+                <img
+                  src={slider.img}
+                  alt={slider.img}
+                  className="w-[200px] m-auto p-8 pb-0 mt-8"
+                />
+              </h2>
             </div>
             <div className="w-3/4 relative">
-                <Swiper
-                    spaceBetween={20}
-                    slidesPerView={3}
-                    navigation={{
-                        prevEl: prevRef.current,
-                        nextEl: nextRef.current,
-                    }}
-                    onInit={(swiper) => {
-                        swiper.params.navigation.prevEl = prevRef.current;
-                        swiper.params.navigation.nextEl = nextRef.current;
-                        swiper.navigation.init();
-                        swiper.navigation.update();
-                    }}
-                    modules={[Navigation]}
-                >
-                    {cards.map((card, index) => (
-                        <SwiperSlide key={index}>
-                            <SlidingCard
-                                price={card.price}
-                                oldPrice={card.oldPrice}
-                                description={card.description}
-                                description1={card.description1}
-                                btn={card.btn}
-                                btn1={card.btn1}
-                            />
-                        </SwiperSlide>
-                    ))}
-                </Swiper>
-                <button ref={prevRef} className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full z-10">
-                    &#10095;
-                </button>
-                <button ref={nextRef} className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full z-10">
-                    &#10094;
-                </button>
+              <button
+                ref={prevRef1}
+                className="absolute w-10 -left-11 top-1/2 transform -translate-y-1/2 p-2 text-white bg-black rounded-full z-10"
+              >
+                <ChevronLeftIcon />
+              </button>
+              <button
+                ref={nextRef1}
+                className="absolute w-10 -right-11 top-1/2 transform -translate-y-1/2 p-2 text-white bg-black rounded-full z-10"
+              >
+                <ChevronRightIcon />
+              </button>
+              <Swiper
+                spaceBetween={20}
+                slidesPerView={1}
+                breakpoints={{
+                  640: { slidesPerView: 1 },
+                  768: { slidesPerView: 2 },
+                  1024: { slidesPerView: 3 },
+                }}
+                navigation={{
+                  prevEl: prevRef1.current,
+                  nextEl: nextRef1.current,
+                }}
+                onInit={(swiper) => {
+                  swiper.params.navigation.prevEl = prevRef1.current;
+                  swiper.params.navigation.nextEl = nextRef1.current;
+                  swiper.navigation.init();
+                  swiper.navigation.update();
+                }}
+                modules={[Navigation]}
+              >
+                {slider.cards.map((card, cardIndex) => (
+                  <SwiperSlide key={cardIndex}>
+                    <SlidingCard
+                      price={card.price}
+                      oldPrice={card.oldPrice}
+                      description={card.description}
+                      description1={card.description1}
+                      btn={card.btn}
+                      btn1={card.btn1}
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
             </div>
+          </div>
         </div>
-    );
+      ))}
+
+      {/* دومین اسلایدر */}
+      {mainCards2.map((slider, index) => (
+        <div key={index} className="flex flex-col items-center w-full">
+          {slider.Title}
+          {slider.desc}
+          <div className="flex items-center justify-center p-12 bg-blue-400 rounded-3xl shadow-md w-11/12 max-md:p-0">
+            <div className="w-1/4 text-center max-md:hidden">
+              <h2 className="text-[28px] mb-4 text-white text-thick">
+                <p>{slider.body1}</p>
+                <p>{slider.body2}</p>
+                <p className="text-lg mt-4 font-thin">{slider.bodyDesc}</p>
+                <img
+                  src={slider.img}
+                  alt={slider.img}
+                  className="w-[200px] m-auto p-8 pb-0 mt-8"
+                />
+              </h2>
+            </div>
+            <div className="w-3/4 relative">
+              <button
+                ref={prevRef2}
+                className="absolute -left-11 w-10 top-1/2 transform -translate-y-1/2 p-2 text-white bg-black rounded-full z-10"
+              >
+                <ChevronLeftIcon />
+              </button>
+              <button
+                ref={nextRef2}
+                className="absolute -right-11 w-10 top-1/2 transform -translate-y-1/2 p-2 text-white bg-black rounded-full z-10"
+              >
+                <ChevronRightIcon />
+              </button>
+              <Swiper
+                spaceBetween={20}
+                slidesPerView={1}
+                breakpoints={{
+                  640: { slidesPerView: 1 },
+                  768: { slidesPerView: 2 },
+                  1024: { slidesPerView: 3 },
+                }}
+                navigation={{
+                  prevEl: prevRef2.current,
+                  nextEl: nextRef2.current,
+                }}
+                onInit={(swiper) => {
+                  swiper.params.navigation.prevEl = prevRef2.current;
+                  swiper.params.navigation.nextEl = nextRef2.current;
+                  swiper.navigation.init();
+                  swiper.navigation.update();
+                }}
+                modules={[Navigation]}
+              >
+                {slider.cards.map((card, cardIndex) => (
+                  <SwiperSlide key={cardIndex}>
+                    <SlidingCard
+                      price={card.price}
+                      oldPrice={card.oldPrice}
+                      description={card.description}
+                      description1={card.description1}
+                      btn={card.btn}
+                      btn1={card.btn1}
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+          </div>
+        </div>
+      ))}
+    </>
+  );
 };
 
 export default SlidingCards;

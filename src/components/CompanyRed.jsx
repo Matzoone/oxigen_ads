@@ -1,9 +1,6 @@
-
-import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { Pagination, Navigation } from "swiper/modules";
 import DarkCard from "./DarkCard";
 import SlidingCards from "./SlidingCard";
 const CompanyRed = () => {
@@ -12,7 +9,7 @@ const CompanyRed = () => {
       <div className="flex justify-center">
         <DarkCard />
       </div>
-      <div className="flex justify-center">
+      <div className="flex justify-center flex-col items-center w-full">
         <SlidingCards />
       </div>
     </>
@@ -20,6 +17,3 @@ const CompanyRed = () => {
 };
 
 export default CompanyRed;
-
-
-
