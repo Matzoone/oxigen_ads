@@ -93,3 +93,10 @@ body {
 .text-thick2 {
   -webkit-text-stroke: 1.5px;
 }
+
+.text-thick3 {
+  -webkit-text-stroke: 3px;
+}
+.text-word {
+  word-spacing: 2px;
+}

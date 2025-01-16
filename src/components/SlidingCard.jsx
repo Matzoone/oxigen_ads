@@ -25,10 +25,10 @@ const SlidingCard = ({
         {formattedOldPrice}
       </div>
       <div className="text-xl font-semibold mb-4">{formattedPrice}</div>
-      <button className="bg-blue-600 py-2 px-4 rounded-2xl text-lg m-2 w-full font-black text-white">
+      <button className="bg-blue-600 py-2 px-4 rounded-2xl text-lg m-2 w-full font-black text-white hover:scale-110 transition hover:border-blue-600 hover:bg-white hover:text-blue-600 border">
         {btn}
       </button>
-      <button className="bg-blue-600 py-2 px-4 rounded-2xl text-lg m-2 w-full font-black text-white">
+      <button className="bg-blue-600 py-2 px-4 rounded-2xl text-lg m-2 w-full font-black text-white  hover:scale-110 transition hover:border-blue-600 hover:bg-white hover:text-blue-600 border">
         {btn1}
       </button>
     </div>
@@ -36,7 +36,6 @@ const SlidingCard = ({
 };
 
 const SlidingCards = () => {
-  // دکمه‌های ناوبری برای هر اسلایدر
   const prevRef1 = useRef(null);
   const nextRef1 = useRef(null);
   const prevRef2 = useRef(null);
@@ -169,7 +168,6 @@ const SlidingCards = () => {
 
   return (
     <>
-      {/* اولین اسلایدر */}
       {mainCards.map((slider, index) => (
         <div key={index} className="flex flex-col items-center w-full">
           {slider.Title}
@@ -190,13 +188,13 @@ const SlidingCards = () => {
             <div className="w-3/4 relative">
               <button
                 ref={prevRef1}
-                className="absolute w-10 -left-11 top-1/2 transform -translate-y-1/2 p-2 text-white bg-black rounded-full z-10"
+                className="absolute w-10 -left-11 top-1/2 transform -translate-y-1/2 p-2 text-white bg-black rounded-full z-10 transition hover:scale-125"
               >
                 <ChevronLeftIcon />
               </button>
               <button
                 ref={nextRef1}
-                className="absolute w-10 -right-11 top-1/2 transform -translate-y-1/2 p-2 text-white bg-black rounded-full z-10"
+                className="absolute w-10 -right-11 top-1/2 transform -translate-y-1/2 p-2 text-white bg-black rounded-full z-10 transition hover:scale-125"
               >
                 <ChevronRightIcon />
               </button>
@@ -237,10 +235,8 @@ const SlidingCards = () => {
           </div>
         </div>
       ))}
-
-      {/* دومین اسلایدر */}
       {mainCards2.map((slider, index) => (
-        <div key={index} className="flex flex-col items-center w-full">
+        <div key={index} className="flex flex-col items-center w-full mb-20">
           {slider.Title}
           {slider.desc}
           <div className="flex items-center justify-center p-12 bg-blue-400 rounded-3xl shadow-md w-11/12 max-md:p-0">
@@ -258,17 +254,18 @@ const SlidingCards = () => {
             </div>
             <div className="w-3/4 relative">
               <button
-                ref={prevRef2}
-                className="absolute -left-11 w-10 top-1/2 transform -translate-y-1/2 p-2 text-white bg-black rounded-full z-10"
-              >
-                <ChevronLeftIcon />
-              </button>
-              <button
                 ref={nextRef2}
-                className="absolute -right-11 w-10 top-1/2 transform -translate-y-1/2 p-2 text-white bg-black rounded-full z-10"
+                className="absolute -right-11 w-10 top-1/2 transform -translate-y-1/2 p-2 text-white bg-black rounded-full z-10 transition hover:scale-125"
               >
                 <ChevronRightIcon />
               </button>
+              <button
+                ref={prevRef2}
+                className="absolute -left-11 w-10 top-1/2 transform -translate-y-1/2 p-2 text-white bg-black rounded-full z-10 transition hover:scale-125"
+              >
+                <ChevronLeftIcon />
+              </button>
+
               <Swiper
                 spaceBetween={20}
                 slidesPerView={1}
